@@ -11,31 +11,49 @@ To incorporate into an Azure DevOps pipeline:
 7. The first command line creates the virtual environment.
 
 Display name = rem create Venv
+
 Script = 
-`echo Creating Python virtual environment in root
-cd ..
-python -m venv env`
+
+`echo Creating Python virtual environment in root`
+
+`cd ..`
+
+`python -m venv env`
 
 8. The second installs the python dependencies
 
 Display name = install python dependencies
+
 Script = 
-`echo Setting proxy
-set HTTP_PROXY=REMOVED
-set HTTPS_PROXY=REMOVED
-echo Installing arcgis
-cmd /k "cd /d $(System.DefaultWorkingDirectory)\env\Scripts && activate.bat && cd /d $(System.DefaultWorkingDirectory) && python -m pip install --no-cache-dir arcgis"`
+
+`echo Setting proxy`
+
+`set HTTP_PROXY=REMOVED`
+
+`set HTTPS_PROXY=REMOVED`
+
+`echo Installing arcgis`
+
+`cmd /k "cd /d $(System.DefaultWorkingDirectory)\env\Scripts && activate.bat && cd /d $(System.DefaultWorkingDirectory) && python -m pip install --no-cache-dir arcgis"`
 
 9. The third runs pytest
 
 Display name = run pytests
+
 Script = 
-`set HTTP_PROXY=REMOVED
-set HTTPS_PROXY=REMOVED
-echo Running Python Tests
-cmd /k "cd /d $(System.DefaultWorkingDirectory)\env\Scripts # enters the venv dir
-&& activate.bat # activates the venv
-&& cd /d $(System.DefaultWorkingDirectory)\tests_py\ # enters the test dir
-&& pytest --verbose --junitxml=$(System.DefaultWorkingDirectory)\py-test-results.xml # runs pytest as a command with output in junitxml`
+
+`set HTTP_PROXY=REMOVED`
+
+`set HTTPS_PROXY=REMOVED`
+
+`echo Running Python Tests`
+
+`cmd /k "cd /d $(System.DefaultWorkingDirectory)\env\Scripts # enters the venv dir`
+
+`&& activate.bat # activates the venv`
+
+`&& cd /d $(System.DefaultWorkingDirectory)\tests_py\ # enters the test dir`
+
+`&& pytest --verbose --junitxml=$(System.DefaultWorkingDirectory)\py-test-results.xml # runs pytest as a command with output in junitxml`
 
 10. Finally, in addition to the cmd tasks, a Publish Test Results task is added. 
