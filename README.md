@@ -23,20 +23,15 @@ Script =
 `echo Setting proxy
 set HTTP_PROXY=REMOVED
 set HTTPS_PROXY=REMOVED
-
 echo Installing arcgis
-
 cmd /k "cd /d $(System.DefaultWorkingDirectory)\env\Scripts && activate.bat && cd /d $(System.DefaultWorkingDirectory) && python -m pip install --no-cache-dir arcgis"`
 
 9. The third runs pytest
 
 Display name = run pytests
-
 Script = 
-
 `set HTTP_PROXY=REMOVED
 set HTTPS_PROXY=REMOVED
-
 echo Running Python Tests
 cmd /k "cd /d $(System.DefaultWorkingDirectory)\env\Scripts # enters the venv dir
 && activate.bat # activates the venv
